@@ -114,24 +114,26 @@ st.write(chart_data)
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# Display chat messages
+# Display previous messages
 for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
         st.write(msg["content"])
 
-# User input box
-user_input = st.chat_input("Type your message...")
+# Take user input
+prompt = st.chat_input("Type a message...")
 
-if user_input:
-    # Add user message
-    st.session_state.messages.append({"role": "user", "content": user_input})
+if prompt:
+    # Add user message to history
+    st.session_state.messages.append({"role": "user", "content": prompt})
+
     with st.chat_message("user"):
-        streamlit_highcharts(data_table)
+        st.write(prompt)
 
-    # Generate bot response (dummy or API call)
-    bot_reply = f"You said: {user_input}"
+    # Generate a dummy bot response
+    bot_reply = f"You said: **{prompt}**"
 
-    # Add bot message
+    # Add bot message to history
     st.session_state.messages.append({"role": "assistant", "content": bot_reply})
+
     with st.chat_message("assistant"):
         st.write(bot_reply)
