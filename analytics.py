@@ -26,7 +26,7 @@ def init():
         # Add user message to chat history
         st.session_state.messages.append({"role": "user", "content": prompt})
 
-        response = f"Echo: {process_user_input(prompt)}"
+        response = f"{ai_helper.getChatResponse(prompt, st.session_state.messages)}"
         # Display assistant response in chat message container
         with st.chat_message("assistant"):
             st.markdown(response)
