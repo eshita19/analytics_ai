@@ -9,7 +9,7 @@ def process_user_input(user_input_msg):
     
 
 def init():
-    st.title("Echo Bot")
+    st.title("Analytics bot")
     # Initialize chat history
     if "messages" not in st.session_state:
         st.session_state.messages = []
