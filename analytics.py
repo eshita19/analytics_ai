@@ -1,12 +1,6 @@
 import streamlit as st
+import chat_ai_helper
 
-import constants
-import ai_helper
-
-
-def process_user_input(user_input_msg):
-    return user_input_msg.upper()
-    
 
 def init():
     st.title("Analytics bot")
@@ -26,7 +20,7 @@ def init():
         # Add user message to chat history
         st.session_state.messages.append({"role": "user", "content": prompt})
 
-        response = f"{ai_helper.getChatResponse(prompt, st.session_state.messages)}"
+        response = f"{chat_ai_helper.getChatResponse(prompt, st.session_state.messages)}"
         # Display assistant response in chat message container
         with st.chat_message("assistant"):
             st.markdown(response)
