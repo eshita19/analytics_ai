@@ -3,3 +3,5 @@ streamlit
 streamlit_highcharts # via langsmith
 
 streamlit-aggrid
+
+OpenAI

@@ -1,12 +1,26 @@
 import streamlit as st
+from openai import OpenAI
 
+OLLAMA_BASE_URL = "http://localhost:11434/v1"
+ollama = OpenAI(base_url=OLLAMA_BASE_URL, api_key='ollama')
+MODEL = "llama3.1:latest"
+system_message = """
+You are assitant for doing multiple calculations.
+"""
 
 def process_user_input(user_input_msg):
     return user_input_msg.upper()
 
+def ai_call():
+    history = [{"role":h["role"], "content":h["content"]} for h in history]
+    messages = [{"role": "system", "content": system_message}] + history + [{"role": "user", "content": message}] 
+    response = ollama.chat.completions.create(model=MODEL, messages=messages)
+    print(f"Content received from LLM {response.choices[0].message.content}")
+    return response.choices[0].message.content
+    
+
 def init():
     st.title("Echo Bot")
-
     # Initialize chat history
     if "messages" not in st.session_state:
         st.session_state.messages = []
@@ -17,7 +31,7 @@ def init():
             st.markdown(message["content"])
 
     # React to user input
-    if prompt := st.chat_input("What is up?"):
+    if prompt := st.chat_input(""):
         # Display user message in chat message container
         st.chat_message("user").markdown(prompt)
         # Add user message to chat history
