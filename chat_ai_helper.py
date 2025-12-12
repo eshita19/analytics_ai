@@ -1,8 +1,7 @@
 from constants import OLLAMA, MODEL
 
 CHAT_SYSTEM_MESSAGE = """
-You are Data Analytics expert. Given Data Points you can convert to Highcharts Config.
-Data generated should be in JSON format. Reply only with the JSON.
+You are Data Analytics expert. Using tools you can help in generating desired result to user.
 """
 
 get_contact_center_data = {
@@ -25,10 +24,13 @@ get_chart_config = {
         "additionalProperties": False
     }
 }
+tools = [get_contact_center_data, get_chart_config]
 
 def getChatResponse(message, history):
     history = [{"role":h["role"], "content":h["content"]} for h in history]
     messages = [{"role": "system", "content": CHAT_SYSTEM_MESSAGE}] + history + [{"role": "user", "content": message}] 
-    response = OLLAMA.chat.completions.create(model=MODEL, messages=messages)
+    response = OLLAMA.chat.completions.create(model=MODEL, messages=messages, tools=tools)
     print(f"Content received from LLM {response.choices[0].message.content}")
+    message = response.choices[0].message
+    
     return response.choices[0].message.content

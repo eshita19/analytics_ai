@@ -1,7 +1,7 @@
 from constants import OLLAMA, MODEL
 
 HIGHCHART_CONFIG_SYSTEM_MESSAGE  = """You are an expert in generating Highchart config. 
-Given the type of Chart and Data points, you can generate the Highchart Config JSON.
+Given the type of Chart and Data points, you should generate the Highchart Config JSON.
 You should only return the JSON.
  """
 def getChatResponse(message):

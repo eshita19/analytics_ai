@@ -1,7 +1,7 @@
 def get_contact_center_data(): 
     return {
-        "agent1" : "100%",
-        "agent2": "30%",
-        "agent3": "56%",
-        "agent4": "72%"
+        "agent1" : "100Rs",
+        "agent2": "30RS",
+        "agent3": "56RS",
+        "agent4": "72RS"
     }
